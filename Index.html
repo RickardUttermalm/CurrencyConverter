@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,38 +9,52 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="css/Stylesheet.css"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/Stylesheet.css" />
     <script src="js/Utilities.js"></script>
     <script src="js/Api.js"></script>
     <script src="js/App.js"></script>
-    
+
 </head>
+
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-0 col-md-2 col-lg-4"></div>
-            <div class="col-sm-12 col-md-8 col-lg-4">
+            <div class="col-sm-0 col-md-2 col-lg-3"></div>
+            <div class="col-sm-12 col-md-8 col-lg-6">
                 <div class="maincontainer">
                     <div class="row text-center">
                         <h1>Currency exchanger</h1>
                     </div>
-                    <div class="row">
-                        <div class="col-6 text-center">
-                            <input type="text" id="fromCurrency"/>
-                            <br>
-                            <br>
-                            <br>
-                            <input type="text">
+                    <div class="md-form pb-3">
+                        <div class="col-sm-12 col-md-6 col-lg-6 text-center">
+                            <input type="text" id="fromCurrency" class="form-control mdb-autocomplete" 
+                            placeholder="Currency I have" list="countryList"/>
+                            <datalist id="countryList"></datalist>
+
                         </div>
-                        <div class="col-6 text-center">
+                        <div class="col-sm-12 col-md-6 col-lg-6  text-center">
+                            <input type="text" id="toCurrency" class="form-control mdb-autocomplete" placeholder="Currency i want"/>
+
+
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6  text-center">
+                            <input type="text" id="fromResult" class="form-control mdb-autocomplete" placeholder="Amount"/>
+
+
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 text-center">
+                            <input type="text" id="toResult" class="form-control mdb-autocomplete"/>
+
 
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-0 col-md-2 col-lg-4"></div>
         </div>
+        <div class="col-sm-0 col-md-2 col-lg-3"></div>
     </div>
-    
+    </div>
+
 </body>
+
 </html>

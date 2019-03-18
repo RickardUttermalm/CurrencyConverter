@@ -29,15 +29,11 @@ var api = (function(){
     {
         //var currencies = await fetchData('https://api.exchangeratesapi.io/latest');
         var rates = localStorage.getItem("rates");
-        console.log(rates);
         var currencies = JSON.parse(rates);
-        console.log(currencies);
         var CountryList = await getCountrynames(currencies.rates);
-        console.log(CountryList);
     
         var list = document.getElementById("countryList");
         var list2 = document.getElementById("countryList2");
-        console.log(list);
         CountryList.forEach(function(item) {
             var option = document.createElement('option');
             var arr = item.split(" ");
@@ -52,11 +48,35 @@ var api = (function(){
             //list2.appendChild(option);
           });
     }
+
+    async function getExchange(fromCurr, toCurr)
+    {
+        console.log(fromCurr);
+        console.log(toCurr);
+        let rate;
+        let storeddata = localStorage.getItem(fromCurr + toCurr);
+        if(storeddata == null)
+        {
+            //promise = await fetch(`https://api.exchangeratesapi.io/latest?symbols=${fromCurr},${toCurr}`);
+            var rates = await fetch(`https://api.exchangeratesapi.io/latest?base=SEK&symbols=USD`);
+            rate = rates.json();
+            console.log(rate);
+        }
+        else
+        {
+            rate = JSON.parse(storeddata);
+        }
+        var amount = document.querySelector("#Amount");
+
+        document.querySelector("#toResult").value = amount * rate;
+        
+    }
     
     return{
         fetchData: fetchData,
         getCountrynames: getCountrynames,
         fillDropdowns: fillDropdowns,
-        storeData: storeData
+        storeData: storeData,
+        getExchange: getExchange
     };
 })();

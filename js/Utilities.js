@@ -6,7 +6,8 @@ var utilities = (function(){
         let rate = JSON.parse(storeddata);
         console.log(rate + " cached");
         let amount = document.querySelector("#Amount");
-        document.querySelector("#toResult").value = amount.value * rate;        
+        document.querySelector("#toResult").value = amount.value * rate;
+            
     }
 
     function getReverseExchange()

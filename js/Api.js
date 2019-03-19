@@ -51,26 +51,25 @@ var api = (function(){
 
     async function getExchange(fromCurr, toCurr)
     {
-        console.log(fromCurr);
-        console.log(toCurr);
         var from = fromCurr.split(" ").pop();
-        var to = fromCurr.split(" ").pop();
-        let rate;
+        var to = toCurr.split(" ").pop();
         let storeddata = localStorage.getItem(from + to);
         if(storeddata == null)
         {
-            var promise = await fetch(`https://api.exchangeratesapi.io/latest?symbols=${from},${to}`);
+            var promise = await fetch(`https://api.exchangeratesapi.io/latest?base=${from}&symbols=${to}`);
             //var rates = await fetch(`https://api.exchangeratesapi.io/latest?base=SEK&symbols=USD`);
-            rate = promise.json();
+            var rate = await promise.json();
             console.log(rate);
+            console.log(rate.rates[to]);
         }
         else
         {
             rate = JSON.parse(storeddata);
+            alert("nej");
         }
         var amount = document.querySelector("#Amount");
 
-        document.querySelector("#toResult").value = amount * rate.rates[0];
+        document.querySelector("#toResult").value = amount.value * rate.rates[to];
         
     }
     

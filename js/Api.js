@@ -36,14 +36,14 @@ var api = (function(){
         var list2 = document.getElementById("countryList2");
         CountryList.forEach(function(item) {
             var option = document.createElement('option');
-            var arr = item.split(" ");
-            var name = "";
-            for(var i = 0; i < arr.length -1; i ++)
-            {
-                name =name + arr[i] + " ";
-            }
-            option.value = name;
-            option.innerHTML = arr.pop(); 
+            // var arr = item.split(" ");
+            // var name = "";
+            // for(var i = 0; i < arr.length -1; i ++)
+            // {
+            //     name =name + arr[i] + " ";
+            // }
+            option.value = item;
+            //option.innerHTML = arr.pop(); 
             list.appendChild(option);
             //list2.appendChild(option);
           });
@@ -53,13 +53,15 @@ var api = (function(){
     {
         console.log(fromCurr);
         console.log(toCurr);
+        var from = fromCurr.split(" ").pop();
+        var to = fromCurr.split(" ").pop();
         let rate;
-        let storeddata = localStorage.getItem(fromCurr + toCurr);
+        let storeddata = localStorage.getItem(from + to);
         if(storeddata == null)
         {
-            //promise = await fetch(`https://api.exchangeratesapi.io/latest?symbols=${fromCurr},${toCurr}`);
-            var rates = await fetch(`https://api.exchangeratesapi.io/latest?base=SEK&symbols=USD`);
-            rate = rates.json();
+            var promise = await fetch(`https://api.exchangeratesapi.io/latest?symbols=${from},${to}`);
+            //var rates = await fetch(`https://api.exchangeratesapi.io/latest?base=SEK&symbols=USD`);
+            rate = promise.json();
             console.log(rate);
         }
         else
@@ -68,7 +70,7 @@ var api = (function(){
         }
         var amount = document.querySelector("#Amount");
 
-        document.querySelector("#toResult").value = amount * rate;
+        document.querySelector("#toResult").value = amount * rate.rates[0];
         
     }
     

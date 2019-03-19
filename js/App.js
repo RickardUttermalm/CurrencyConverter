@@ -11,6 +11,7 @@ async function Init(){
     fromCurr.addEventListener("change", function(){api.getRate(fromCurr.value, toCurr.value)});
     toCurr.addEventListener("change", function(){api.getRate(fromCurr.value, toCurr.value)});
     //Amount.addEventListener("keydown", function(){api.getExchange(fromCurr.value, toCurr.value)});
-    Amount.addEventListener("keydown", function(){utilities.getExchange()});
+    Amount.addEventListener("input", function(){utilities.getExchange()});
+    Result.addEventListener("input", function(){utilities.getReverseExchange()});
     
 }

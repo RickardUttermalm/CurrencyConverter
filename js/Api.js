@@ -10,6 +10,7 @@ var api = (function(){
     async function storeData()
     {
         var currencies = await fetchData('https://api.exchangeratesapi.io/latest');
+        console.log(currencies);
         localStorage.setItem("rates", JSON.stringify(currencies));
     }
 

@@ -53,23 +53,25 @@ var api = (function(){
     {
         var from = fromCurr.split(" ").pop();
         var to = toCurr.split(" ").pop();
-        let storeddata = localStorage.getItem(from + to);
+        let storeddata = sessionStorage.getItem(from + to);
         if(storeddata == null)
         {
             var promise = await fetch(`https://api.exchangeratesapi.io/latest?base=${from}&symbols=${to}`);
-            //var rates = await fetch(`https://api.exchangeratesapi.io/latest?base=SEK&symbols=USD`);
-            var rate = await promise.json();
+            let rate = await promise.json();
             console.log(rate);
             console.log(rate.rates[to]);
+            localStorage.setItem(from + to, rate.rates[to]);
+            
+            let amount = document.querySelector("#Amount");
+            document.querySelector("#toResult").value = amount.value * rate.rates[to];
         }
         else
         {
-            rate = JSON.parse(storeddata);
-            alert("nej");
+            let rate = JSON.parse(storeddata);
+            console.log(rate + " cached");
+            let amount = document.querySelector("#Amount");
+            document.querySelector("#toResult").value = amount.value * rate;
         }
-        var amount = document.querySelector("#Amount");
-
-        document.querySelector("#toResult").value = amount.value * rate.rates[to];
         
     }
     

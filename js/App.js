@@ -9,6 +9,6 @@ async function Init(){
     const toCurr = document.querySelector("#toCurrency");
     const Amount = document.querySelector("#Amount");
     Amount.addEventListener("keydown", function(){api.getExchange(fromCurr.value, toCurr.value)});
-    Amount.addEventListener("change", function(){api.getExchange(fromCurr.value, toCurr.value)});
+    
     
 }

@@ -33,7 +33,7 @@ var api = (function(){
         var CountryList = await getCountrynames(currencies.rates);
     
         var list = document.getElementById("countryList");
-        var list2 = document.getElementById("countryList2");
+        //var list2 = document.getElementById("countryList2");
         CountryList.forEach(function(item) {
             var option = document.createElement('option');
             // var arr = item.split(" ");
@@ -49,37 +49,47 @@ var api = (function(){
           });
     }
 
-    async function getExchange(fromCurr, toCurr)
+    // async function getExchange(fromCurr, toCurr)
+    // {
+    //     var from = fromCurr.split(" ").pop();
+    //     var to = toCurr.split(" ").pop();
+    //     let storeddata = localStorage.getItem(from + to);
+    //     if(storeddata == null)
+    //     {
+    //         var promise = await fetch(`https://api.exchangeratesapi.io/latest?base=${from}&symbols=${to}`);
+    //         let rate = await promise.json();
+    //         console.log(rate);
+    //         console.log(rate.rates[to]);
+    //         localStorage.setItem(from + to, rate.rates[to]);
+            
+    //         let amount = document.querySelector("#Amount");
+    //         document.querySelector("#toResult").value = amount.value * rate.rates[to];
+    //     }
+    //     else
+    //     {
+    //         let rate = JSON.parse(storeddata);
+    //         console.log(rate + " cached");
+    //         let amount = document.querySelector("#Amount");
+    //         document.querySelector("#toResult").value = amount.value * rate;
+    //     }  
+    // }
+    async function getRate(fromCurr, toCurr)
     {
+        console.log(fromCurr + " fromcurr");
+        console.log(toCurr + " tocurr");
         var from = fromCurr.split(" ").pop();
         var to = toCurr.split(" ").pop();
-        let storeddata = localStorage.getItem(from + to);
-        if(storeddata == null)
-        {
-            var promise = await fetch(`https://api.exchangeratesapi.io/latest?base=${from}&symbols=${to}`);
-            let rate = await promise.json();
-            console.log(rate);
-            console.log(rate.rates[to]);
-            localStorage.setItem(from + to, rate.rates[to]);
-            
-            let amount = document.querySelector("#Amount");
-            document.querySelector("#toResult").value = amount.value * rate.rates[to];
-        }
-        else
-        {
-            let rate = JSON.parse(storeddata);
-            console.log(rate + " cached");
-            let amount = document.querySelector("#Amount");
-            document.querySelector("#toResult").value = amount.value * rate;
-        }
+        var promise = await fetch(`https://api.exchangeratesapi.io/latest?base=${from}&symbols=${to}`);
+        let rate = await promise.json();
+        localStorage.setItem("currentrate", rate.rates[to]);
         
     }
-    
+
     return{
         fetchData: fetchData,
         getCountrynames: getCountrynames,
         fillDropdowns: fillDropdowns,
         storeData: storeData,
-        getExchange: getExchange
+        getRate: getRate
     };
 })();

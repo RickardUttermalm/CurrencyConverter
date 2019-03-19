@@ -53,7 +53,7 @@ var api = (function(){
     {
         var from = fromCurr.split(" ").pop();
         var to = toCurr.split(" ").pop();
-        let storeddata = sessionStorage.getItem(from + to);
+        let storeddata = localStorage.getItem(from + to);
         if(storeddata == null)
         {
             var promise = await fetch(`https://api.exchangeratesapi.io/latest?base=${from}&symbols=${to}`);
